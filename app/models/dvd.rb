@@ -1,2 +1,0 @@
-class Dvd < ApplicationRecord
-end
