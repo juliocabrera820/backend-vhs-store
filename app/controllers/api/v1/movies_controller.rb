@@ -3,39 +3,39 @@ class Api::V1::MoviesController < ApplicationController
 
   def index
     @movies = Movie.all
-    render json: @movies, status: :ok
+    render :index
   end
 
   def show
-    render json: @rental
+    render :show
   end
 
   def create
-    @rental = Movie.new(movie_params)
-    if @rental.save
-      render json: @rental, status: :created, location: @rental
+    @movie = Movie.new(movie_params)
+    if @movie.save
+      render json: @movie, status: :created, location: @movie
     else
-      render json: @rental.errors, status: :unprocessable_entity
+      render json: @movie.errors, status: :unprocessable_entity
     end
   end
 
   def destroy
-    @rental.destroy
+    @movie.destroy
   end
 
   def update
-    @rental = Movie.new(movie_params)
-    if @rental.update
-      render json: @rental, status: :created, location: @rental
+    @movie = Movie.new(movie_params)
+    if @movie.update
+      render json: @movie, status: :created, location: @movie
     else
-      render json: @rental.errors, status: :unprocessable_entity
+      render json: @movie.errors, status: :unprocessable_entity
     end
   end
 
   private
 
   def set_movie
-    @rental = Movie.find(params[:id])
+    @movie = Movie.find(params[:id])
   end
 
   def movie_params
