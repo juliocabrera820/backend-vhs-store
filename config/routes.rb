@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   concern :generable do
     resources :movie_genres
   end
-  namespace :api do
+  namespace :api, defaults: { format: 'json' } do
     namespace :v1 do
       resources :clients, concerns: :rentable
       resources :vhs, concerns: :rentable
