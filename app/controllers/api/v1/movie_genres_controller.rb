@@ -1,9 +1,9 @@
-class Api::V1::MoviesController < ApplicationController
-  before_action :set_movie, only: %i[show update delete]
+class Api::V1::MovieGenresController < ApplicationController
+  before_action :set_movie_genre, only: %i[show update delete]
 
   def index
-    @movies = Movie.all
-    render json: @movies, status: :ok
+    @movie_genres = MovieGenre.all
+    render json: @movie_genres, status: :ok
   end
 
   def show
@@ -11,7 +11,7 @@ class Api::V1::MoviesController < ApplicationController
   end
 
   def create
-    @rental = Movie.new(movie_params)
+    @rental = MovieGenre.new(movie_genre_params)
     if @rental.save
       render json: @rental, status: :created, location: @rental
     else
@@ -24,7 +24,7 @@ class Api::V1::MoviesController < ApplicationController
   end
 
   def update
-    @rental = Movie.new(movie_params)
+    @rental = MovieGenre.new(movie_genre_params)
     if @rental.update
       render json: @rental, status: :created, location: @rental
     else
@@ -34,11 +34,11 @@ class Api::V1::MoviesController < ApplicationController
 
   private
 
-  def set_movie
-    @rental = Movie.find(params[:id])
+  def set_movie_genre
+    @rental = MovieGenre.find(params[:id])
   end
 
-  def movie_params
-    params.permit(:title, :year, :length, :director, :description, :featured_image)
+  def movie_genre_params
+    params.permit()
   end
 end
