@@ -12,7 +12,7 @@ Rails.application.routes.draw do
       resources :movies, concerns: :generable do
         resources :vhs
       end
-      resources :genre, concerns: :generable
+      resources :genres, concerns: :generable
     end
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
