@@ -2,6 +2,6 @@ module Rentable
   extend ActiveSupport::Concern
 
   included do
-    has_many :rentals, as: :rentable, dependent: :destroy
+    has_many :rentals, dependent: :destroy
   end
 end

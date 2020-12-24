@@ -1,1 +1,1 @@
-json.name movie.name
+json.name genre.name

@@ -36,10 +36,10 @@ class Api::V1::MovieGenresController < ApplicationController
   private
 
   def set_movie_genre
-    @movie_genre = MovieGenre.find(params[:id])
+    @movie_genre = MovieGenre.find_by(movie_id: params[:movie_id].to_i, genre_id: params[:genre_id].to_i)
   end
 
   def movie_genre_params
-    params.permit()
+    params.permit(:movie_id, :genre_id)
   end
 end

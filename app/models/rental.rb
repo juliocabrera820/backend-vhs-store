@@ -1,4 +1,6 @@
 class Rental < ApplicationRecord
-  belongs_to :rentable, polymorphic: true
-  validates :current, presence: true
+  validates :client_id, :vhs_id, presence: true
+
+  belongs_to :client
+  belongs_to :vhs
 end
