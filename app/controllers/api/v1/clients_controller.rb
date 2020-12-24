@@ -1,5 +1,5 @@
 class Api::V1::ClientsController < ApplicationController
-  before_action :set_client, only: %i[show update delete]
+  before_action :set_client, only: %i[show update destroy]
 
   def index
     @clients = Client.all
@@ -13,7 +13,7 @@ class Api::V1::ClientsController < ApplicationController
   def create
     @client = Client.new(client_params)
     if @client.save
-      render json: @client, status: :created, location: @client
+      render json: @client, status: :created
     else
       render json: @client.errors, status: :unprocessable_entity
     end
@@ -21,12 +21,13 @@ class Api::V1::ClientsController < ApplicationController
 
   def destroy
     @client.destroy
+    head :no_content
   end
 
   def update
     @client = Client.new(client_params)
     if @client.update
-      render json: @client, status: :created, location: @client
+      render json: @client, status: :created
     else
       render json: @client.errors, status: :unprocessable_entity
     end

@@ -1,5 +1,5 @@
 class Api::V1::MoviesController < ApplicationController
-  before_action :set_movie, only: %i[show update delete]
+  before_action :set_movie, only: %i[show update destroy]
 
   def index
     @movies = Movie.all
@@ -13,7 +13,7 @@ class Api::V1::MoviesController < ApplicationController
   def create
     @movie = Movie.new(movie_params)
     if @movie.save
-      render json: @movie, status: :created, location: @movie
+      render json: @movie, status: :created
     else
       render json: @movie.errors, status: :unprocessable_entity
     end
@@ -21,12 +21,13 @@ class Api::V1::MoviesController < ApplicationController
 
   def destroy
     @movie.destroy
+    head :no_content
   end
 
   def update
     @movie = Movie.new(movie_params)
     if @movie.update
-      render json: @movie, status: :created, location: @movie
+      render json: @movie, status: :created
     else
       render json: @movie.errors, status: :unprocessable_entity
     end
