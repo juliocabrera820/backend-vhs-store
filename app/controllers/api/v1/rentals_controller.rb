@@ -1,5 +1,5 @@
 class Api::V1::RentalsController < ApplicationController
-  before_action :set_rental, only: %i[show update delete]
+  before_action :set_rental, only: %i[show update destroy]
 
   def index
     @rentals = Rental.all
@@ -13,7 +13,7 @@ class Api::V1::RentalsController < ApplicationController
   def create
     @rental = Rental.new(rental_params)
     if @rental.save
-      render json: @rental, status: :created, location: @rental
+      render json: @rental, status: :created
     else
       render json: @rental.errors, status: :unprocessable_entity
     end
@@ -21,12 +21,13 @@ class Api::V1::RentalsController < ApplicationController
 
   def destroy
     @rental.destroy
+    head :no_content
   end
 
   def update
     @rental = Rental.new(rental_params)
     if @rental.update
-      render json: @rental, status: :created, location: @rental
+      render json: @rental, status: :created
     else
       render json: @rental.errors, status: :unprocessable_entity
     end

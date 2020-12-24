@@ -1,5 +1,5 @@
 class Api::V1::VhsController < ApplicationController
-  before_action :set_vhs, only: %i[show update delete]
+  before_action :set_vhs, only: %i[show update destroy]
 
   def index
     @vhs = Vhs.all
@@ -13,7 +13,7 @@ class Api::V1::VhsController < ApplicationController
   def create
     @vhs = Vhs.new(vhs_params)
     if @vhs.save
-      render json: @vhs, status: :created, location: @vhs
+      render json: @vhs, status: :created
     else
       render json: @vhs.errors, status: :unprocessable_entity
     end
@@ -21,12 +21,13 @@ class Api::V1::VhsController < ApplicationController
 
   def destroy
     @vhs.destroy
+    head :no_content
   end
 
   def update
     @vhs = Vhs.new(vhs_params)
     if @vhs.update
-      render json: @vhs, status: :created, location: @vhs
+      render json: @vhs, status: :created
     else
       render json: @vhs.errors, status: :unprocessable_entity
     end

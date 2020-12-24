@@ -1,5 +1,5 @@
 class Api::V1::GenresController < ApplicationController
-  before_action :set_genre, only: %i[show update delete]
+  before_action :set_genre, only: %i[show update destroy]
 
   def index
     @genres = Genre.all
@@ -7,35 +7,36 @@ class Api::V1::GenresController < ApplicationController
   end
 
   def show
-    render json: @rental
+    render json: @genre
   end
 
   def create
-    @rental = Genre.new(genre_params)
-    if @rental.save
-      render json: @rental, status: :created, location: @rental
+    @genre = Genre.new(genre_params)
+    if @genre.save
+      render json: @genre, status: :created
     else
-      render json: @rental.errors, status: :unprocessable_entity
+      render json: @genre.errors, status: :unprocessable_entity
     end
   end
 
   def destroy
-    @rental.destroy
+    @genre.destroy!
+    head :no_content
   end
 
   def update
-    @rental = Genre.new(genre_params)
-    if @rental.update
-      render json: @rental, status: :created, location: @rental
+    @genre = Genre.new(genre_params)
+    if @genre.update
+      render json: @genre, status: :created
     else
-      render json: @rental.errors, status: :unprocessable_entity
+      render json: @genre.errors, status: :unprocessable_entity
     end
   end
 
   private
 
   def set_genre
-    @rental = Genre.find(params[:id])
+    @genre = Genre.find(params[:id])
   end
 
   def genre_params

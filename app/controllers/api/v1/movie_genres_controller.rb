@@ -1,5 +1,5 @@
 class Api::V1::MovieGenresController < ApplicationController
-  before_action :set_movie_genre, only: %i[show update delete]
+  before_action :set_movie_genre, only: %i[show update destroy]
 
   def index
     @movie_genres = MovieGenre.all
@@ -7,35 +7,36 @@ class Api::V1::MovieGenresController < ApplicationController
   end
 
   def show
-    render json: @rental
+    render json: @movie_genre
   end
 
   def create
-    @rental = MovieGenre.new(movie_genre_params)
-    if @rental.save
-      render json: @rental, status: :created, location: @rental
+    @movie_genre = MovieGenre.new(movie_genre_params)
+    if @movie_genre.save
+      render json: @movie_genre, status: :created
     else
-      render json: @rental.errors, status: :unprocessable_entity
+      render json: @movie_genre.errors, status: :unprocessable_entity
     end
   end
 
   def destroy
-    @rental.destroy
+    @movie_genre.destroy
+    head :no_content
   end
 
   def update
-    @rental = MovieGenre.new(movie_genre_params)
-    if @rental.update
-      render json: @rental, status: :created, location: @rental
+    @movie_genre = MovieGenre.new(movie_genre_params)
+    if @movie_genre.update
+      render json: @movie_genre, status: :created
     else
-      render json: @rental.errors, status: :unprocessable_entity
+      render json: @movie_genre.errors, status: :unprocessable_entity
     end
   end
 
   private
 
   def set_movie_genre
-    @rental = MovieGenre.find(params[:id])
+    @movie_genre = MovieGenre.find(params[:id])
   end
 
   def movie_genre_params
