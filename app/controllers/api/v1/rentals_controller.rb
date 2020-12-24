@@ -36,10 +36,10 @@ class Api::V1::RentalsController < ApplicationController
   private
 
   def set_rental
-    @rental = Rental.find(params[:id])
+    @rental = Rental.find_by(vhs_id: params[:vhs_id].to_i, client_id: params[:client_id].to_i)
   end
 
   def rental_params
-    params.permit()
+    params.permit(:client_id, :vhs_id)
   end
 end
