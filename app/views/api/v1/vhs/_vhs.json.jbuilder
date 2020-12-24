@@ -1,0 +1,1 @@
+json.serial_number movie.serial_number

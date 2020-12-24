@@ -1,0 +1,1 @@
+json.rental movie.rental

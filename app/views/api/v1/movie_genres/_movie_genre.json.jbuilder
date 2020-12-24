@@ -1,0 +1,1 @@
+json.id movie_genre.id

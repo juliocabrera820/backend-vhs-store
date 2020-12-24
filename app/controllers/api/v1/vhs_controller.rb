@@ -3,11 +3,11 @@ class Api::V1::VhsController < ApplicationController
 
   def index
     @vhs = Vhs.all
-    render json: @vhs
+    render :index
   end
 
   def show
-    render json: @vhs
+    render :show
   end
 
   def create

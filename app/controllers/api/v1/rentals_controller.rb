@@ -3,11 +3,11 @@ class Api::V1::RentalsController < ApplicationController
 
   def index
     @rentals = Rental.all
-    render json: @rentals, status: :ok
+    render :index
   end
 
   def show
-    render json: @rental
+    render :show
   end
 
   def create
