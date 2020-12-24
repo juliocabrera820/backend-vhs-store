@@ -16,6 +16,8 @@ DB_USERNAME = XXXXX
 DB_PASSWORD = XXXXXXX
 ```
 
+`bundle install`
+
 `rake db:create`
 
 `rake db:migrate`
