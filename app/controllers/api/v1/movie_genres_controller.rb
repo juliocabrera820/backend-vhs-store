@@ -3,11 +3,17 @@ class Api::V1::MovieGenresController < ApplicationController
 
   def index
     @movie_genres = MovieGenre.all
-    render :index
+    render json: @movie_genres.to_json(only: [:id], include: {
+      movie: { only: [:title] },
+      genre: { only: [:name] }
+    }), status: :ok
   end
 
   def show
-    render :show
+    render json: @movie_genre.to_json(only: [:id], include: {
+      movie: { only: [:title] },
+      genre: { only: [:name] }
+    })
   end
 
   def create
@@ -25,8 +31,7 @@ class Api::V1::MovieGenresController < ApplicationController
   end
 
   def update
-    @movie_genre = MovieGenre.new(movie_genre_params)
-    if @movie_genre.update
+    if @movie_genre.update(movie_genre_params)
       render json: @movie_genre, status: :created
     else
       render json: @movie_genre.errors, status: :unprocessable_entity
@@ -36,7 +41,7 @@ class Api::V1::MovieGenresController < ApplicationController
   private
 
   def set_movie_genre
-    @movie_genre = MovieGenre.find_by(movie_id: params[:movie_id].to_i, genre_id: params[:genre_id].to_i)
+    @movie_genre = MovieGenre.find(params[:id])
   end
 
   def movie_genre_params

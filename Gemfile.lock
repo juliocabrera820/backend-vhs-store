@@ -95,8 +95,6 @@ GEM
       activesupport (>= 4.2.0)
     i18n (1.8.5)
       concurrent-ruby (~> 1.0)
-    jbuilder (2.10.1)
-      activesupport (>= 5.0.0)
     jsonapi-renderer (0.2.2)
     listen (3.3.3)
       rb-fsevent (~> 0.10, >= 0.10.3)
@@ -199,7 +197,6 @@ DEPENDENCIES
   dotenv-rails
   factory_bot_rails
   faker
-  jbuilder (~> 2.7)
   listen (~> 3.3)
   pg
   puma (~> 5.0)

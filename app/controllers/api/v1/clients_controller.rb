@@ -3,11 +3,11 @@ class Api::V1::ClientsController < ApplicationController
 
   def index
     @clients = Client.all
-    render :index
+    render json: @clients.to_json(only: [:name, :home_address]), status: :ok
   end
 
   def show
-    render :show
+    render json: @client.to_json(only: [:name, :home_address]), status: :ok
   end
 
   def create
@@ -25,9 +25,8 @@ class Api::V1::ClientsController < ApplicationController
   end
 
   def update
-    @client = Client.new(client_params)
-    if @client.update
-      render json: @client, status: :created
+    if @client.update(client_params)
+      render json: @client, status: :ok
     else
       render json: @client.errors, status: :unprocessable_entity
     end
