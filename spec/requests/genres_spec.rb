@@ -25,7 +25,7 @@ RSpec.describe 'Genres', type: :request do
     let(:horror) { FactoryBot.create(:genre, name: 'Horror') }
     it 'returns no content status' do
       delete "/api/v1/genres/#{horror.id}"
-      expect(response).to have_http_status(:no_content)
+      expect(response).to have_http_status(:success)
     end
   end
 end

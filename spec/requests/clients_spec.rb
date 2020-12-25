@@ -25,7 +25,7 @@ RSpec.describe "Clients", type: :request do
     let(:client) { FactoryBot.create(:client) }
     it 'returns no content status' do
       delete "/api/v1/clients/#{client.id}"
-      expect(response).to have_http_status(:no_content)
+      expect(response).to have_http_status(:success)
     end
   end
 end
