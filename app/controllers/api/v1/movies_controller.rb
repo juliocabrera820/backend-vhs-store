@@ -3,11 +3,13 @@ class Api::V1::MoviesController < ApplicationController
 
   def index
     @movies = Movie.all
-    render json: @movies.to_json(only: [:title, :year, :length, :description, :director]), status: :ok
+    render json: @movies.to_json(only: [:title, :year, :length, :description, :director],
+      include: { vhs: { only: [:serial_number]}}), status: :ok
   end
 
   def show
-    render json: @movie.to_json(only: [:title, :year, :length, :description, :director]), status: :ok
+    render json: @movie.to_json(only: [:title, :year, :length, :description, :director],
+      include: { vhs: { only: [:serial_number]}}), status: :ok
   end
 
   def create
