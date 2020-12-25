@@ -3,11 +3,11 @@ class Api::V1::GenresController < ApplicationController
 
   def index
     @genres = Genre.all
-    render :index
+    render json: @genres.to_json(only: [:name]), status: :ok
   end
 
   def show
-    render :show
+    render json: @genre.to_json(only: [:name]), status: :ok
   end
 
   def create
@@ -25,8 +25,7 @@ class Api::V1::GenresController < ApplicationController
   end
 
   def update
-    @genre = Genre.new(genre_params)
-    if @genre.update
+    if @genre.update(genre_params)
       render json: @genre, status: :created
     else
       render json: @genre.errors, status: :unprocessable_entity

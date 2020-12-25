@@ -3,11 +3,11 @@ class Api::V1::VhsController < ApplicationController
 
   def index
     @vhs = Vhs.all
-    render :index
+    render json: @vhs.to_json(only: [:serial_number]), status: :ok
   end
 
   def show
-    render :show
+    render json: @vhs.to_json(only: [:serial_number]), status: :ok
   end
 
   def create
@@ -25,8 +25,7 @@ class Api::V1::VhsController < ApplicationController
   end
 
   def update
-    @vhs = Vhs.new(vhs_params)
-    if @vhs.update
+    if @vhs.update(vhs_params)
       render json: @vhs, status: :created
     else
       render json: @vhs.errors, status: :unprocessable_entity

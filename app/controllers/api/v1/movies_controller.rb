@@ -3,11 +3,11 @@ class Api::V1::MoviesController < ApplicationController
 
   def index
     @movies = Movie.all
-    render :index
+    render json: @movies.to_json(only: [:title, :year, :length, :description, :director]), status: :ok
   end
 
   def show
-    render :show
+    render json: @movie.to_json(only: [:title, :year, :length, :description, :director]), status: :ok
   end
 
   def create
@@ -25,8 +25,7 @@ class Api::V1::MoviesController < ApplicationController
   end
 
   def update
-    @movie = Movie.new(movie_params)
-    if @movie.update
+    if @movie.update(movie_params)
       render json: @movie, status: :created
     else
       render json: @movie.errors, status: :unprocessable_entity

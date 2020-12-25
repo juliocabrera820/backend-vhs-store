@@ -3,11 +3,17 @@ class Api::V1::RentalsController < ApplicationController
 
   def index
     @rentals = Rental.all
-    render :index
+    render json: @rentals.to_json(only: [:current], include: {
+      vhs: { only: [:serial_number] },
+      client: { only: [:name] }
+    }), status: :ok
   end
 
   def show
-    render :show
+    render json: @rental.to_json(only: [:current], include: {
+      vhs: { only: [:serial_number] },
+      client: { only: [:name] }
+    }), status: :ok
   end
 
   def create
@@ -25,8 +31,7 @@ class Api::V1::RentalsController < ApplicationController
   end
 
   def update
-    @rental = Rental.new(rental_params)
-    if @rental.update
+    if @rental.update(rental_params)
       render json: @rental, status: :created
     else
       render json: @rental.errors, status: :unprocessable_entity
