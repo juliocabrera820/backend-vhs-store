@@ -11,7 +11,6 @@ RSpec.describe Movie, type: :model do
   end
   describe 'associations' do
     it { should have_one_attached :featured_image }
-    # TODO: Add association
     it { should have_many :vhs }
     it { should have_many :movie_genres }
   end
