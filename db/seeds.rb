@@ -9,3 +9,5 @@ Movie.create(title: 'hellraiser', year: 1988, length: 100, description: 'xenobit
 Movie.create(title: 'midsommar', year: 2019, length: 120, description: 'culture and horror', director: 'idk idk')
 
 Genre.create(name: 'horror')
+
+Client.create(name: 'john', home_address: 'c 78 #658')
