@@ -1,7 +1,9 @@
 class MovieSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
-  attributes :title, :year, :length, :director, :description, :featured_image
+  attributes :id, :title, :year, :length, :director, :description, :featured_image
   
+  has_many :vhs
+
   def featured_image
     if object.featured_image.attached?
       {
