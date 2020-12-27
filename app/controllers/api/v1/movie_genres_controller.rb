@@ -3,17 +3,11 @@ class Api::V1::MovieGenresController < ApplicationController
 
   def index
     @movie_genres = MovieGenre.all
-    render json: @movie_genres.to_json(only: [:id], include: {
-      movie: { only: [:title] },
-      genre: { only: [:name] }
-    }), status: :ok
+    render json: @movie_genres, status: :ok
   end
 
   def show
-    render json: @movie_genre.to_json(only: [:id], include: {
-      movie: { only: [:title] },
-      genre: { only: [:name] }
-    })
+    render json: @movie_genre, status: :ok
   end
 
   def create

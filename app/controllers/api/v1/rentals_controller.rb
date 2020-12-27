@@ -3,17 +3,11 @@ class Api::V1::RentalsController < ApplicationController
 
   def index
     @rentals = Rental.all
-    render json: @rentals.to_json(only: [:current], include: {
-      vhs: { only: [:serial_number] },
-      client: { only: [:name] }
-    }), status: :ok
+    render json: @rentals, status: :ok
   end
 
   def show
-    render json: @rental.to_json(only: [:current], include: {
-      vhs: { only: [:serial_number] },
-      client: { only: [:name] }
-    }), status: :ok
+    render json: @rental, status: :ok
   end
 
   def create
