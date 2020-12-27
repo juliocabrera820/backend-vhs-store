@@ -3,11 +3,11 @@ class Api::V1::GenresController < ApplicationController
 
   def index
     @genres = Genre.all
-    render json: @genres.to_json(only: [:name]), status: :ok
+    render json: @genres, status: :ok
   end
 
   def show
-    render json: @genre.to_json(only: [:name]), status: :ok
+    render json: @genre, status: :ok
   end
 
   def create

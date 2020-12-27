@@ -3,11 +3,11 @@ class Api::V1::ClientsController < ApplicationController
 
   def index
     @clients = Client.all
-    render json: @clients.to_json(only: [:name, :home_address]), status: :ok
+    render json: @clients, status: :ok
   end
 
   def show
-    render json: @client.to_json(only: [:name, :home_address]), status: :ok
+    render json: @client, status: :ok
   end
 
   def create
